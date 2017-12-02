@@ -7,10 +7,10 @@ document.addEventListener('DOMContentLoaded', function() {
     let width = window.innerWidth;
     let height = window.innerHeight;
     
-    const MIN_X = 40;
-    const MAX_X = width - 40;
-    const MIN_Y = 40;
-    const MAX_Y = height - 40;
+    const MIN_X = 100;
+    const MAX_X = width - 100;
+    const MIN_Y = 100;
+    const MAX_Y = height - 100;
 
     canvas.width = width;
     canvas.height = height;
@@ -26,8 +26,12 @@ document.addEventListener('DOMContentLoaded', function() {
             this.size = size;
         }
         draw(ctx, lastPoint) {
+            let s = Math.random() * 0.2 + 0.2;
+            ctx.strokeStyle = 'rgba(0, 0, 0, ' + s + ')';
+            ctx.beginPath();
             ctx.moveTo(this.x, this.y);
             ctx.lineTo(lastPoint.x, lastPoint.y);
+            ctx.stroke();
         }
     }
 
@@ -46,12 +50,12 @@ document.addEventListener('DOMContentLoaded', function() {
         let offsX = (width / 2) - x;
         let offsY = (height / 2) - y;
         x += Math.pow(Math.random(), 3) * offsX;
-        y += Math.random() * offsY;
+        y += Math.pow(Math.random(), 2) * offsY;
         return new Point(x, y, Math.random() * 4);
     }
     
     function init() {
-        let count = 213;
+        let count = 128;
         let p = getRandomPoint();
         let n = getRandomPoint();
         p.draw(ctx, p);
